@@ -9,10 +9,12 @@ import {
   TouchableOpacity,
   Alert,
   KeyboardAvoidingView,
+  StatusBar,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const deviceWidth = Dimensions.get('window').width;
-const deviceHeight = Dimensions.get('window').height;
+const deviceHeight = Dimensions.get('screen').height - StatusBar.currentHeight;
 
 import bg from '../assets/image/bg.jpeg';
 
@@ -54,9 +56,9 @@ export default class Login extends Component {
               />
             </View>
             <TouchableOpacity
-              onPress={() => Alert.alert('Logging In...')}
+              onPress={this.props.login}
               style={loginStyle.submit}>
-              <Text style={loginStyle.submitText}>&gt;</Text>
+              <Icon name={'caret-right'} color={'#FFF'} size={40} />
             </TouchableOpacity>
           </View>
           <View style={loginStyle.link}>
@@ -68,7 +70,7 @@ export default class Login extends Component {
   }
 }
 
-const accentHeight = 250;
+const accentHeight = 280;
 
 const loginStyle = StyleSheet.create({
   parent: {
@@ -77,9 +79,11 @@ const loginStyle = StyleSheet.create({
   },
   accent1: {
     position: 'absolute',
-    width: deviceWidth,
-    height: deviceHeight,
+    flex: 1,
     zIndex: 0,
+    resizeMode: 'cover',
+    width: '100%',
+    height: deviceHeight,
   },
   accentOverlay: {
     position: 'absolute',
@@ -91,7 +95,6 @@ const loginStyle = StyleSheet.create({
     height: accentHeight,
     width: deviceWidth,
     position: 'absolute',
-    // backgroundColor: '#62725A',
     backgroundColor: '#1E2C1D',
     zIndex: 2,
     padding: 50,
@@ -106,6 +109,7 @@ const loginStyle = StyleSheet.create({
   },
   brand: {
     width: 220,
+    position: 'relative',
   },
   brandTextWrapperRight: {
     alignItems: 'flex-end',
@@ -127,15 +131,14 @@ const loginStyle = StyleSheet.create({
   formCard: {
     position: 'relative',
     width: deviceWidth - 70,
-    height: 200,
     backgroundColor: 'white',
     alignSelf: 'center',
     paddingTop: 50,
-    paddingBottom: 50,
+    paddingBottom: 20,
   },
   link: {
     marginTop: 50,
-    marginBottom: 70,
+    marginBottom: 90,
     paddingRight: 30,
     paddingLeft: 30,
     alignItems: 'baseline',
@@ -153,6 +156,8 @@ const loginStyle = StyleSheet.create({
   inputLabel: {
     textTransform: 'uppercase',
     letterSpacing: 5,
+    fontWeight: 'bold',
+    color: '#1E2C1D',
   },
   submit: {
     position: 'absolute',
@@ -160,7 +165,7 @@ const loginStyle = StyleSheet.create({
     height: 80,
     justifyContent: 'center',
     alignItems: 'center',
-    bottom: -20,
+    bottom: -40,
     right: -20,
     backgroundColor: '#1E2C1D',
   },
