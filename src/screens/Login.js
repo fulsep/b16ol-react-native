@@ -7,7 +7,6 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
-  Alert,
   KeyboardAvoidingView,
   StatusBar,
 } from 'react-native';

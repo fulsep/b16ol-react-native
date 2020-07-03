@@ -46,11 +46,14 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLogin: false,
+      isLogin: true,
     };
   }
   login = () => {
     this.setState({isLogin: true});
+  };
+  logout = () => {
+    this.setState({isLogin: false});
   };
   render() {
     const {isLogin} = this.state;
@@ -60,14 +63,12 @@ export default class App extends Component {
           {!isLogin && (
             <>
               <Stack.Screen
-                component={props => (
-                  <LoginScreen {...props} login={this.login} />
-                )}
                 options={{
                   headerShown: false,
                 }}
-                name={'login'}
-              />
+                name={'login'}>
+                {props => <LoginScreen {...props} login={this.login} />}
+              </Stack.Screen>
             </>
           )}
           {isLogin && (
